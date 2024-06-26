@@ -13,9 +13,19 @@ import java.util.Map;
 @Service
 public class PostService {
     private final Map<Long, Post> posts = new HashMap<>();
+    private static Integer globalId = 0;
 
     public Collection<Post> findAll() {
         return posts.values();
+    }
+
+    public Post findById(long id) {
+        Post post = posts.get(id);
+        if (post == null) {
+            throw new NotFoundException(String.format("Пост ид %d не найден", id));
+        } else {
+            return post;
+        }
     }
 
     public Post create(Post post) {
@@ -45,11 +55,6 @@ public class PostService {
     }
 
     private long getNextId() {
-        long currentMaxId = posts.keySet()
-                .stream()
-                .mapToLong(id -> id)
-                .max()
-                .orElse(0);
-        return ++currentMaxId;
+        return globalId++;
     }
 }

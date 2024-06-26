@@ -10,6 +10,7 @@ import java.time.Instant;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 @Service
 public class UserService {
@@ -59,6 +60,18 @@ public class UserService {
             return oldUser;
         }
         throw new NotFoundException("Пользователь с id = " + newUser.getId() + " не найден");
+    }
+
+    public User findUserByEmail(String email) {
+        Optional<User> result = users.values().stream()
+                .filter(user -> user.getEmail().equals(email))
+                .findFirst();
+
+        if (result.isPresent()) {
+            return result.get();
+        } else {
+            throw new NotFoundException("Пользователь с email = " + email + " не найден");
+        }
     }
 
     // вспомогательный метод для генерации идентификатора нового поста
