@@ -88,6 +88,7 @@ public class ImageService {
 
         return image;
     }
+
     private Path saveFile(MultipartFile file, Post post) {
         try {
             String uniqueFileName = getUniqueFileName(file.getOriginalFilename());

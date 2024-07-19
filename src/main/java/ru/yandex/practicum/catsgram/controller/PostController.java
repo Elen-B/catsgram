@@ -23,13 +23,13 @@ public class PostController {
             @RequestParam(value = "size", defaultValue = "10", required = false) Integer size,
             @RequestParam(value = "sort", defaultValue = "desc", required = false) String sort
     ) {
-        if(!(sort.equals("asc") || sort.equals("desc"))){
+        if (!(sort.equals("asc") || sort.equals("desc"))) {
             throw new ParameterNotValidException("sort", "Некорректное значение");
         }
         if (size <= 0) {
             throw new ParameterNotValidException("size", "Некорректный размер выборки. Размер должен быть больше нуля");
         }
-        if(page < 0){
+        if (page < 0) {
             throw new ParameterNotValidException("page", "Некорректный номер страницы. Номер не может быть отрицательным");
         }
 
@@ -45,7 +45,7 @@ public class PostController {
 
     @PostMapping
     public Post create(@RequestBody Post post) {
-        return  postService.create(post);
+        return postService.create(post);
     }
 
     @PutMapping

@@ -24,7 +24,7 @@ public class PostService {
     public List<Post> findAll(Integer size, Integer from, String sort) {
         return posts.values().stream().sorted((p0, p1) -> {
             int comp = p0.getPostDate().compareTo(p1.getPostDate()); //прямой порядок сортировки
-            if(sort.equals("desc")){
+            if (sort.equals("desc")) {
                 comp = -1 * comp; //обратный порядок сортировки
             }
             return comp;
